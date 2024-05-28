@@ -70,13 +70,27 @@ fun SimpleDatePickerDialogScreen(modifier: Modifier = Modifier) {
         yearRange = 2020..2025
     )
 
-    datePickerState.displayMode = DisplayMode.Input
+    datePickerState.displayMode = DisplayMode.Picker
 
     val selectedDate = datePickerState.selectedDateMillis?.let {
         convertMillisToDate(it)
     } ?: ""
 
+    var range by remember {
+        mutableStateOf(datePickerState.selectedDateMillis?.let {
+            it-System.currentTimeMillis()
+        })
+    }
 
+    var selectedDate2 by remember {
+        mutableStateOf(datePickerState.selectedDateMillis)
+    }
+    Text(text = "${convertMillisToDate(range!!)}")
+    Text(text = "${convertMillisToDate(calendar.timeInMillis)}")
+    Text(text = "datepickerstate ${datePickerState.selectedDateMillis}")
+    Text(text = "range ${range}")
+    Text(text = "range /86400= ${range!! /86399000} kun")
+    Text(text = "Selected Date 2= ${selectedDate2}")
 
 
     var showDatePicker by remember { mutableStateOf(false) }
@@ -102,6 +116,8 @@ fun SimpleDatePickerDialogScreen(modifier: Modifier = Modifier) {
                 TextButton(
                     onClick = {
                         showDatePicker = false
+                        selectedDate2=datePickerState.selectedDateMillis
+                        range= (selectedDate2)!! -(System.currentTimeMillis())
                     }
                 ) { Text("OK") }
             },
