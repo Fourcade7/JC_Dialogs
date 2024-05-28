@@ -67,7 +67,7 @@ fun SimpleDatePickerDialogScreen(modifier: Modifier = Modifier) {
     calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)+1)
     val datePickerState = rememberDatePickerState(
         initialSelectedDateMillis = calendar.timeInMillis,
-        yearRange = 1990..2030
+        yearRange = 2020..2025
     )
 
     datePickerState.displayMode = DisplayMode.Input
@@ -128,7 +128,7 @@ fun SimpleDatePickerDialogScreen(modifier: Modifier = Modifier) {
                     dayContentColor = Purple40,
                     selectedDayContainerColor = Purple40,
 
-                    headlineContentColor = Color.Red
+                    headlineContentColor = Color.Black
                 )
             )
         }
